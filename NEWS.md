@@ -1,6 +1,7 @@
 # treeshap (development version)
 
 # treeshap 0.4.0
+* Cleanup in #52 (https://github.com/ModelOriented/treeshap/pull/52). Thanks @kapsner
 * Fixed xgboost api and add depends R>=4.1.0 as in #51 (https://github.com/ModelOriented/treeshap/pull/51). Thanks @kapsner
 * Fix ranger.unify for probability forests as in #43 (https://github.com/ModelOriented/treeshap/pull/43). Thanks @ck37
 * Added support for GPBoost as in #41 (https://github.com/ModelOriented/treeshap/pull/41). Thanks @fabsig

@@ -28,22 +28,23 @@
 #'
 #' @examples
 #' \donttest{
-#' library(gpboost)
-#' param_gpb <- list(objective = "regression", max_depth = 2,
-#'                    force_row_wise = TRUE, num_iterations = 20)
-#' data_fifa <- fifa20$data[!colnames(fifa20$data) %in%
-#'              c('work_rate', 'value_eur', 'gk_diving', 'gk_handling',
-#'              'gk_kicking', 'gk_reflexes', 'gk_speed', 'gk_positioning')]
-#' data <- na.omit(cbind(data_fifa, fifa20$target))
-#' sparse_data <- as.matrix(data[,-ncol(data)])
-#' x <- gpboost::gpb.Dataset(sparse_data, label = as.matrix(data[,ncol(data)]))
-#' gpb_data <- gpboost::gpb.Dataset.construct(x)
-#' gpb_model <- gpboost::gpboost(data = gpb_data, params = param_gpb,
-#'                                 verbose = -1, num_threads = 0)
-#' unified_model <- gpboost.unify(gpb_model, sparse_data)
-#' shaps <- treeshap(unified_model, data[1:2, ])
-#' plot_contribution(shaps, obs = 1)
-#' }
+#' if (requireNamespace("gpboost", quietly = TRUE)) {
+#'   library(gpboost)
+#'   param_gpb <- list(objective = "regression", max_depth = 2,
+#'                      force_row_wise = TRUE, num_iterations = 20)
+#'   data_fifa <- fifa20$data[!colnames(fifa20$data) %in%
+#'                c('work_rate', 'value_eur', 'gk_diving', 'gk_handling',
+#'                'gk_kicking', 'gk_reflexes', 'gk_speed', 'gk_positioning')]
+#'   data <- na.omit(cbind(data_fifa, fifa20$target))
+#'   sparse_data <- as.matrix(data[,-ncol(data)])
+#'   x <- gpboost::gpb.Dataset(sparse_data, label = as.matrix(data[,ncol(data)]))
+#'   gpb_data <- gpboost::gpb.Dataset.construct(x)
+#'   gpb_model <- gpboost::gpboost(data = gpb_data, params = param_gpb,
+#'                                   verbose = -1, num_threads = 0)
+#'   unified_model <- gpboost.unify(gpb_model, sparse_data)
+#'   shaps <- treeshap(unified_model, data[1:2, ])
+#'   plot_contribution(shaps, obs = 1)
+#' }}
 gpboost.unify <- function(gpb_model, data, recalculate = FALSE) {
   if (!requireNamespace("gpboost", quietly = TRUE)) {
     stop("Package \"gpboost\" needed for this function to work. Please install it.",

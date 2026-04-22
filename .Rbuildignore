@@ -13,7 +13,6 @@ vignettes/
 pkgdown/
 ^LICENSE$
 ^CONTRIBUTING.md
-^NEWS.md
 DALEXpiramide
 ^codecov\.yml$
 ^\.github$

@@ -40,9 +40,9 @@
 #'   unified_model <- xgboost.unify(xgb_model, as.matrix(data))
 #'   x <- head(data, 1)
 #'   shap <- treeshap(unified_model, x)
-#'   plot_contribution(shap, 1,  min_max = c(0, 120000000))
+#'   plot_contribution(shap, 1, min_max = c(-5e5, 1.3e8))
 #' }}
-#' 
+#'
 plot_contribution <- function(treeshap,
                               obs = 1,
                               max_vars = 5,
@@ -154,7 +154,7 @@ plot_contribution <- function(treeshap,
     geom_errorbarh(data = df[-c(nrow(df), if (explain_deviation) nrow(df) - 1), ],
                    aes(xmax = position - 0.85,
                        xmin = position + 0.85,
-                       y = cumulative), height = 0,
+                       y = cumulative), width = 0,
                    color = "#371ea3") +
     geom_rect(alpha = 0.9) +
     if (!explain_deviation) (geom_hline(data = df[df$variable == "intercept", ],

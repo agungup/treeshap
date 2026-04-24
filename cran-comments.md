@@ -1,4 +1,8 @@
-# Resubmission
+# Resubmission 2
+
+Resubmission after fixing warnings on too high thread count in "dont test" examples and unit tests.
+
+# Resubmission 1
 
 Resubmission after fixing a warning in a "don't" test example.
 

@@ -35,7 +35,8 @@
 #'    y = target,
 #'    objective = "reg:squarederror",
 #'    max_depth = 3,
-#'    nrounds = 20
+#'    nrounds = 20,
+#'    nthreads = 1
 #'   )
 #'   unified_model <- xgboost.unify(xgb_model, as.matrix(data))
 #'   x <- head(data, 1)

@@ -41,7 +41,8 @@ if (requireNamespace("xgboost", quietly = TRUE) &&
    y = target,
    objective = "reg:squarederror",
    max_depth = 5,
-   nrounds = 10
+   nrounds = 10,
+   nthreads = 1
   )
   unified_model2 <- xgboost.unify(xgb_model2, data)
   inters <- treeshap(unified_model2, as.matrix(data[1:50, ]), interactions = TRUE)

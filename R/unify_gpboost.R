@@ -19,7 +19,7 @@
 #' \code{\link{gbm.unify}} for \code{\link[gbm:gbm]{GBM models}}
 #'
 #' \code{\link{xgboost.unify}} for \code{\link[xgboost:xgboost]{XGBoost models}}
-#' 
+#'
 #' \code{\link{lightgbm.unify}} for \code{\link[lightgbm:lightgbm]{LightGBM models}}
 #'
 #' \code{\link{ranger.unify}} for \code{\link[ranger:ranger]{ranger models}}
@@ -40,7 +40,7 @@
 #'   x <- gpboost::gpb.Dataset(sparse_data, label = as.matrix(data[,ncol(data)]))
 #'   gpb_data <- gpboost::gpb.Dataset.construct(x)
 #'   gpb_model <- gpboost::gpboost(data = gpb_data, params = param_gpb,
-#'                                   verbose = -1, num_threads = 0)
+#'                                   verbose = -1, num_threads = 1)
 #'   unified_model <- gpboost.unify(gpb_model, sparse_data)
 #'   shaps <- treeshap(unified_model, data[1:2, ])
 #'   plot_contribution(shaps, obs = 1)
@@ -90,26 +90,26 @@ gpboost.unify <- function(gpb_model, data, recalculate = FALSE) {
   df <- df[, c("tree_index", "split_index", "split_feature", "Decision.type", "threshold", "Yes", "No", "Missing", "split_gain", "internal_count")]
   colnames(df) <- c("Tree", "Node", "Feature", "Decision.type", "Split", "Yes", "No", "Missing", "Prediction", "Cover")
   attr(df, "sorted") <- NULL
-  
+
   ID <- paste0(df$Node, "-", df$Tree)
   df$Yes <- match(paste0(df$Yes, "-", df$Tree), ID)
   df$No <- match(paste0(df$No, "-", df$Tree), ID)
   df$Missing <- match(paste0(df$Missing, "-", df$Tree), ID)
-  
+
   # Here we lose "Quality" information
   df$Prediction[!is.na(df$Feature)] <- NA
-  
+
   feature_names <- jsonlite::fromJSON(gpb_model$dump_model())$feature_names
   data <- data[,colnames(data) %in% feature_names]
-  
+
   ret <- list(model = as.data.frame(df), data = as.data.frame(data), feature_names = feature_names)
   class(ret) <- "model_unified"
   attr(ret, "missing_support") <- TRUE
   attr(ret, "model") <- "gpboost"
-  
+
   if (recalculate) {
     ret <- set_reference_dataset(ret, as.data.frame(data))
   }
-  
+
   return(ret)
 }

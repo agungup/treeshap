@@ -13,7 +13,7 @@ if (requireNamespace("gpboost", quietly = TRUE)) {
   gpb_fifa <- gpboost::gpboost(data = gpb_data,
                         params = param_gpboost,
                         verbose = -1,
-                        num_threads = 0)
+                        num_threads = 1)
   gpbtree <- gpboost::gpb.model.dt.tree(gpb_fifa)
 
   test_that('gpboost.unify returns an object with correct attributes', {

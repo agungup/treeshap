@@ -72,7 +72,7 @@ test_model <- function(max_depth, nrounds, model_name = "xgboost",
       params = param_lgbm,
       nrounds = nrounds,
       verbose = -1,
-      num_threads = 0
+      num_threads = 1
     )
     return(lightgbm.unify(lgb_model, as.matrix(test_data)))
   }
@@ -293,7 +293,7 @@ if (requireNamespace("lightgbm", quietly = TRUE)) {
     lgb_model <- lightgbm::lightgbm(data = lgb_data,
                                     params = param_lgbm,
                                     verbose = -1,
-                                    num_threads = 0)
+                                    num_threads = 1)
     unified_model <- lightgbm.unify(lgb_model, sparse_data)
     expect_error(treeshap(unified_model, sparse_data[1:2,], verbose = FALSE))
   })

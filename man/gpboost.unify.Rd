@@ -34,7 +34,7 @@ if (requireNamespace("gpboost", quietly = TRUE)) {
   x <- gpboost::gpb.Dataset(sparse_data, label = as.matrix(data[,ncol(data)]))
   gpb_data <- gpboost::gpb.Dataset.construct(x)
   gpb_model <- gpboost::gpboost(data = gpb_data, params = param_gpb,
-                                  verbose = -1, num_threads = 0)
+                                  verbose = -1, num_threads = 1)
   unified_model <- gpboost.unify(gpb_model, sparse_data)
   shaps <- treeshap(unified_model, data[1:2, ])
   plot_contribution(shaps, obs = 1)

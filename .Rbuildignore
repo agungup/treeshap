@@ -13,7 +13,6 @@ vignettes/
 pkgdown/
 ^LICENSE$
 ^CONTRIBUTING.md
-^NEWS.md
 DALEXpiramide
 ^codecov\.yml$
 ^\.github$
@@ -21,3 +20,4 @@ DALEXpiramide
 ^pkgdown$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^revdep$

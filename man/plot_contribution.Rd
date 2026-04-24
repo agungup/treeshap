@@ -52,12 +52,13 @@ if (requireNamespace("xgboost", quietly = TRUE) &&
    y = target,
    objective = "reg:squarederror",
    max_depth = 3,
-   nrounds = 20
+   nrounds = 20,
+   nthreads = 1
   )
   unified_model <- xgboost.unify(xgb_model, as.matrix(data))
   x <- head(data, 1)
   shap <- treeshap(unified_model, x)
-  plot_contribution(shap, 1,  min_max = c(0, 120000000))
+  plot_contribution(shap, 1, min_max = c(-5e5, 1.3e8))
 }}
 
 }

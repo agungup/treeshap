@@ -10,7 +10,8 @@ if (requireNamespace("xgboost", quietly = TRUE)) {
     y = target,
     nrounds = 100,
     objective = "reg:squarederror",
-    max_depth = 3
+    max_depth = 3,
+    nthreads = 1
   )
   xgb_tree <- xgboost::xgb.model.dt.tree(model = xgb_model)
 

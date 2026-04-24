@@ -10,7 +10,8 @@ if (requireNamespace("xgboost", quietly = TRUE)) {
       y = target,
       objective = "reg:squarederror",
       max_depth = 5,
-      nrounds = 100
+      nrounds = 100,
+      nthreads = 1
     )
     unified <- xgboost.unify(xgb_model, as.matrix(data))
     a <- set_reference_dataset(unified, data)$Cover

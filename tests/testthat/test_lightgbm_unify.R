@@ -34,7 +34,7 @@ if (
     data = lgb_data,
     params = param_lightgbm,
     verbose = -1,
-    num_threads = 0
+    num_threads = 1
   )
   lgbmtree <- lightgbm::lgb.model.dt.tree(lgbm_fifa)
 

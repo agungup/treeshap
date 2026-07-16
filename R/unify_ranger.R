@@ -6,6 +6,7 @@
 #' @param rf_model An object of \code{ranger} class. At the moment, models built on data with categorical features
 #' are not supported - please encode them before training.
 #' @param data Reference dataset. A \code{data.frame} or \code{matrix} with the same columns as in the training set of the model. Usually dataset used to train model.
+#' @param pos Target outcome in reference dataset. Default to "1".
 #'
 #' @return a unified model representation - a \code{\link{model_unified.object}} object
 #'
@@ -33,7 +34,7 @@
 #'  shaps <- treeshap(unified_model, data[1:2,])
 #'  plot_contribution(shaps, obs = 1)
 #' }
-ranger.unify <- function(rf_model, data) {
+ranger.unify <- function(rf_model, data, pos = '1') {
   if(!'ranger' %in% class(rf_model)) {
     stop('Object rf_model was not of class "ranger"')
   }
@@ -42,7 +43,7 @@ ranger.unify <- function(rf_model, data) {
     tree_data <- data.table::as.data.table(ranger::treeInfo(rf_model, tree = tree))
     # Fix for probability forests
     if (rf_model$treetype == "Probability estimation") {
-      data.table::setnames(tree_data, "pred.1", "prediction")
+      data.table::setnames(tree_data, paste0("pred.",pos), "prediction")
     }
     tree_data[, c("nodeID",  "leftChild", "rightChild", "splitvarName", "splitval", "prediction")]
   })

@@ -87,11 +87,11 @@ unify.randomForest <- function(model, data, ...){
 }
 
 #' @export
-unify.ranger <- function(model, data, ...){
+unify.ranger <- function(model, data, pos = "1", ...){
   if (model$treetype == "Survival"){
     return(ranger_surv.unify(model, data, ...))
   }
-  ranger.unify(model, data)
+  ranger.unify(model, data, pos)
 }
 
 #' @export
